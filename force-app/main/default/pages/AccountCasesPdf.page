@@ -1,0 +1,34 @@
+<apex:page controller="getAccountCasesPrevWeek" id="thePage" renderAs="PDF">
+    <style>
+    </style>
+    <apex:dataTable value="{!cases}" var="case" id="theTable"
+        rowClasses="odd,even" styleClass="tableClass"  style="border:1px solid black;">
+        <apex:facet name="caption"><h1 style="padding-bottom: 15px;text-align:center;font-size: 20pt;">Last Week Cases PDF</h1></apex:facet>
+
+        <apex:column width="25%">
+            <apex:facet name="header"><h2 style="text-align:center;font-size: 12pt;background-color: #d9d3d2;">Account Name</h2></apex:facet>
+            <apex:outputText value="{!case.Account.Name}"/>
+        </apex:column>
+        <apex:column width="25%">
+            <apex:facet name="header"><h2 style="text-align:center;font-size: 12pt;background-color: #d9d3d2;">Account Owner Name</h2></apex:facet>
+            <apex:outputText value="{!case.Account.Owner.Name}"/>
+        </apex:column>
+        <apex:column width="17%">
+            <apex:facet name="header"><h2 style="text-align:center;font-size: 12pt;background-color: #d9d3d2;">Case Number</h2></apex:facet>
+            <apex:outputText value="{!case.CaseNumber}"/>
+        </apex:column>
+
+        <apex:column width="11%">
+            <apex:facet name="header"><h2 style="text-align:center;font-size: 12pt;background-color: #d9d3d2;">Status</h2></apex:facet>
+            <apex:outputText value="{!case.Status}"/>
+        </apex:column>
+        <apex:column width="11%">
+            <apex:facet name="header"><h2 style="text-align:center;font-size: 12pt;background-color: #d9d3d2;">Priority</h2></apex:facet>
+            <apex:outputText value="{!case.Priority}"/>
+        </apex:column>
+        <apex:column width="11%">
+            <apex:facet name="header"><h2 style="text-align:center;font-size: 12pt;background-color: #d9d3d2;">Origin</h2></apex:facet>
+            <apex:outputText value="{!case.Origin}"/>
+        </apex:column>
+    </apex:dataTable>
+</apex:page>
