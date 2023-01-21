@@ -1,12 +1,12 @@
 <template>
-    <lightning-card title="Cases" icon-name="action:new_case">
+    <lightning-card title="Service Queue Cases" icon-name="action:new_case">
         <lightning-button onclick={handleRefreshButton} label="Refresh" slot="actions"></lightning-button>
         <template if:true={isLoading}>
             <lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner>
         </template>
         <div class="slds-m-around_medium">
             <c-custom-types-global key-field="Id" data={availableCases} columns={columns}
-                onpicklistchanged={handleChangeStatus}>
+                onpicklistchanged={handleChangeStatus} hide-checkbox-column show-row-number-column>
             </c-custom-types-global>
             <template if:true={error}>
                 {error}>
