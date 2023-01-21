@@ -12,17 +12,15 @@ public inherited sharing class ServiceCaseQueueService {
   private static String buildQuery(String condition) {
     String query = 'SELECT Id, Origin, CaseNumber, Priority, Status, OwnerId, Owner.Name, CreatedDate FROM Case WHERE ';
     query += condition;
-    query += ' ORDER BY Priority, CreatedDate DESC LIMIT 250';
+    query += ' ORDER BY Priority, CreatedDate DESC LIMIT 25';
     return query;
   }
 
   @AuraEnabled
   public static void updateCaseStatus(String caseId, String status) {
-    System.debug(status);
     try {
       Case toUpdateCase = new Case(Id = caseId, Status = status);
       Database.SaveResult result = Database.update(toUpdateCase, false);
-      System.debug(result);
     } catch (Exception ex) {
       throw new AuraHandledException('Main issue. ' + ex.getMessage());
     }
