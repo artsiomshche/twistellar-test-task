@@ -1,11 +1,10 @@
 public inherited sharing class ServiceCaseQueueService {
   private static final String TYPE_QUEUE = 'Queue';
-  @AuraEnabled(cacheable=true)
+  @AuraEnabled
   public static List<Case> getUserCases() {
     String userId = UserInfo.getUserId();
     List<Id> queueIds = getQueueIdsByUserId(userId);
     String query = buildQuery();
-
     return Database.query(query);
   }
 

@@ -64,11 +64,7 @@ export default class LightningDataTable extends LightningElement {
   }
 
   handleRefreshButton() {
-    this.isLoading = true;
-    // eslint-disable-next-line @lwc/lwc/no-async-operation
-    setTimeout(() => {
-      this.getUserCases();
-    }, 1000);
+    this.getUserCases();
   }
 
   async handleChangeStatus(event) {
