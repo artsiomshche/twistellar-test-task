@@ -1,5 +1,5 @@
 **LWC component:**
-![image](https://user-images.githubusercontent.com/121222610/213894389-30cb52e8-813c-4752-a978-c13978b58f12.png)
+![image](https://user-images.githubusercontent.com/121222610/213895927-df57c4c5-50ca-4af6-afb3-10a1464b276b.png)
 
 **Visualforce PDF:**
 
