@@ -3,15 +3,15 @@ public inherited sharing class ServiceCaseQueueService {
   public static List<Case> getUserCases() {
     String userId = UserInfo.getUserId();
     List<Id> queueIds = getQueueIdsByUserId(userId);
-    String myQuery = buildQuery('OwnerId = :userId OR OwnerId IN :queueIds');
+    String myQuery = buildQuery();
     List<Case> myCases = Database.query(myQuery);
 
     return myCases;
   }
 
-  private static String buildQuery(String condition) {
+  private static String buildQuery() {
     String query = 'SELECT Id, Origin, CaseNumber, Priority, Status, OwnerId, Owner.Name, CreatedDate FROM Case WHERE ';
-    query += condition;
+    query += ' OwnerId = :userId OR OwnerId IN :queueIds';
     query += ' ORDER BY Priority, CreatedDate DESC LIMIT 25';
     return query;
   }
