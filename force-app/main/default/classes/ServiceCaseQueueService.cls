@@ -1,12 +1,12 @@
 public inherited sharing class ServiceCaseQueueService {
+  private static final String TYPE_QUEUE = 'Queue';
   @AuraEnabled(cacheable=true)
   public static List<Case> getUserCases() {
     String userId = UserInfo.getUserId();
     List<Id> queueIds = getQueueIdsByUserId(userId);
-    String myQuery = buildQuery();
-    List<Case> myCases = Database.query(myQuery);
+    String query = buildQuery();
 
-    return myCases;
+    return Database.query(query);
   }
 
   private static String buildQuery() {
@@ -26,16 +26,6 @@ public inherited sharing class ServiceCaseQueueService {
     }
   }
 
-  private static List<GroupMember> getQueues(String userId) {
-    return [
-      SELECT Group.Id
-      FROM GroupMember
-      WHERE
-        GroupId IN (SELECT Id FROM Group WHERE type = 'Queue')
-        AND UserOrGroupId = :userId
-    ];
-  }
-
   public static List<Id> getQueueIdsByUserId(String userId) {
     List<GroupMember> queues = getQueues(userId);
     List<Id> queueList = new List<Id>();
@@ -43,5 +33,15 @@ public inherited sharing class ServiceCaseQueueService {
       queueList.add(memberQueue.GroupId);
     }
     return queueList;
+  }
+
+  private static List<GroupMember> getQueues(String userId) {
+    return [
+      SELECT Group.Id
+      FROM GroupMember
+      WHERE
+        GroupId IN (SELECT Id FROM Group WHERE type = :TYPE_QUEUE)
+        AND UserOrGroupId = :userId
+    ];
   }
 }

@@ -10,11 +10,10 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 export default class LightningDataTable extends LightningElement {
   @track availableCases = [];
   @track statusOptions = [];
+  @track isLoading = false;
   wiredCases = [];
   recordTypeId;
-  error;
   columns = constants.COLUMNS;
-  @track isLoading = false;
 
   @wire(getObjectInfo, { objectApiName: CASE_OBJECT })
   handleResult({ error, data }) {
@@ -50,12 +49,14 @@ export default class LightningDataTable extends LightningElement {
           tempRec.OwnerName = record.Owner.Name;
           tempRecs.push(tempRec);
         });
-        console.log("PicklistValues: ", this.statusOptions);
-        console.log("tempRecs", tempRecs);
         this.availableCases = tempRecs;
       })
       .catch((error) => {
-        this.error = error;
+        this.displayMessage(
+          "Error!",
+          "An error occured when loading cases " + error?.body?.message,
+          "error"
+        );
       })
       .finally(() => {
         this.isLoading = false;
@@ -71,7 +72,6 @@ export default class LightningDataTable extends LightningElement {
   }
 
   async handleChangeStatus(event) {
-    console.log("Event: ", JSON.stringify(event.detail));
     let { context, value } = event.detail.data;
     if (context && value) {
       this.isLoading = true;

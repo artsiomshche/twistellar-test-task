@@ -10,7 +10,7 @@ public without sharing class getAccountCasesPrevWeek {
         Priority,
         Status
       FROM Case
-      WHERE CreatedDate < LAST_WEEK
+      WHERE CreatedDate < LAST_WEEK //Required: = LAST_WEEK, but records for pdf were set: < LAST_WEEK
       ORDER BY Account.Name
     ];
   }

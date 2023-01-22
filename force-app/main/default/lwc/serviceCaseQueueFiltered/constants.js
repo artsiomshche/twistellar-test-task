@@ -25,8 +25,8 @@ const COLUMNS = [
   },
   {
     label: "Status",
-    fieldName: "Priority",
-    type: "priorityPicklist",
+    fieldName: "Status",
+    type: "statusPicklist",
     wrapText: true,
     typeAttributes: {
       options: { fieldName: "picklistOptions" },
